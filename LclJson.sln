@@ -7,9 +7,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Apps", "Apps", "{28C7B150-2BB7-43CA-9BB7-17826807F5CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lcl.JsonTools", "Lcl.JsonTools\Lcl.JsonTools.csproj", "{DFA9C758-73B1-435B-B4B8-7746BE4F5B55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lcl.JsonTools", "Lcl.JsonTools\Lcl.JsonTools.csproj", "{DFA9C758-73B1-435B-B4B8-7746BE4F5B55}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "JsonExplore", "JsonExplore\JsonExplore.fsproj", "{265CB89D-8ED3-4226-A5C0-490F08A6A1FC}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "JsonExplore", "JsonExplore\JsonExplore.fsproj", "{265CB89D-8ED3-4226-A5C0-490F08A6A1FC}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "JsonReformat", "JsonReformat\JsonReformat.fsproj", "{5C1329DB-0F9B-4B97-AF06-C8792624EE3F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +27,10 @@ Global
 		{265CB89D-8ED3-4226-A5C0-490F08A6A1FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{265CB89D-8ED3-4226-A5C0-490F08A6A1FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{265CB89D-8ED3-4226-A5C0-490F08A6A1FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C1329DB-0F9B-4B97-AF06-C8792624EE3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C1329DB-0F9B-4B97-AF06-C8792624EE3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C1329DB-0F9B-4B97-AF06-C8792624EE3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C1329DB-0F9B-4B97-AF06-C8792624EE3F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +38,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{DFA9C758-73B1-435B-B4B8-7746BE4F5B55} = {185C0E74-022A-4FB0-BDD0-F8B1496379F0}
 		{265CB89D-8ED3-4226-A5C0-490F08A6A1FC} = {28C7B150-2BB7-43CA-9BB7-17826807F5CA}
+		{5C1329DB-0F9B-4B97-AF06-C8792624EE3F} = {28C7B150-2BB7-43CA-9BB7-17826807F5CA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CF8642EC-BBEC-44CA-BED6-45251C16BB10}

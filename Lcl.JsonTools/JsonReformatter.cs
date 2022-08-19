@@ -89,16 +89,21 @@ namespace Lcl.JsonTools
     public bool Indenting {
       get => _indenting;
       set {
-        _indenting = value;
-        if(value)
+        if(_indenting != value)
         {
-          Target.Formatting = Formatting.Indented;
-          Target.IndentChar = Options.IndentChar;
-          Target.Indentation = Options.Indentation;
-        }
-        else
-        {
-          Target.Formatting = Formatting.None;
+          //Target.Flush();
+          _indenting = value;
+          if(value)
+          {
+            Target.Formatting = Formatting.Indented;
+            //Target.IndentChar = Options.IndentChar;
+            //Target.Indentation = Options.Indentation;
+          }
+          else
+          {
+            Target.Formatting = Formatting.None;
+          }
+          //Target.Flush();
         }
       }
     }
@@ -153,12 +158,12 @@ namespace Lcl.JsonTools
         case JsonToken.PropertyName:
           return TranscribeProperty();
         case JsonToken.StartObject:
-          return TranscibeObject();
+          return TranscribeObject();
         case JsonToken.EndObject:
           throw new InvalidOperationException(
             "Spurious '}' detected");
         case JsonToken.StartArray:
-          return TranscibeArray();
+          return TranscribeArray();
         case JsonToken.EndArray:
           throw new InvalidOperationException(
             "Spurious ']' detected");
@@ -172,9 +177,7 @@ namespace Lcl.JsonTools
     {
       while(Source.TokenType != terminator)
       {
-
-        // TBD
-
+        TranscribeCore();
         if(!Source.Read())
         {
           return false;
@@ -183,14 +186,19 @@ namespace Lcl.JsonTools
       return true;
     }
 
-    private bool TranscibeObject()
+    private bool TranscribeObject()
     {
       var indenting = Indenting;
       try
       {
         ObjectDepth++;
-        Indenting = NextIndenting();
         Target.WriteStartObject();
+        Indenting = NextIndenting();
+        if(!Source.Read())
+        {
+          throw new InvalidOperationException(
+            "Unexpected EOF at '{'");
+        }
         var result = TranscribeTerminated(JsonToken.EndObject);
         Target.WriteEndObject();
         return result;
@@ -202,15 +210,20 @@ namespace Lcl.JsonTools
       }
     }
 
-    private bool TranscibeArray()
+    private bool TranscribeArray()
     {
       var indenting = Indenting;
       try
       {
         ArrayDepth++;
-        Indenting = NextIndenting();
         Target.WriteStartArray();
-        var result = TranscribeTerminated(JsonToken.EndObject);
+        Indenting = NextIndenting();
+        if(!Source.Read())
+        {
+          throw new InvalidOperationException(
+            "Unexpected EOF at '['");
+        }
+        var result = TranscribeTerminated(JsonToken.EndArray);
         Target.WriteEndArray();
         return result;
       }
@@ -228,8 +241,8 @@ namespace Lcl.JsonTools
       try
       {
         PropertyNameStack.Push(propName);
-        Indenting = NextIndenting();
         Target.WritePropertyName(propName);
+        Indenting = NextIndenting();
         if(!Source.Read())
         {
           throw new InvalidOperationException(
